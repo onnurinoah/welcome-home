@@ -60,7 +60,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 .field{margin-top:16px}.field label{display:block;font-size:11px;letter-spacing:.13em;color:var(--gold);margin-bottom:8px}.field input,.field textarea{width:100%;border:1px solid rgba(170,200,220,.22);background:rgba(255,255,255,.06);color:#fff;border-radius:8px;padding:13px 14px;outline:none}.field input:focus,.field textarea:focus{border-color:rgba(247,226,160,.7)}.field textarea{height:70px;resize:none}.optional{font-size:9px;color:var(--muted);letter-spacing:0;margin-left:5px}
 .picker{height:174px;position:relative;margin:3px -3px 0}.scroll{height:100%;overflow:auto;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-mask-image:linear-gradient(180deg,transparent,#000 27%,#000 73%,transparent)}.scroll::-webkit-scrollbar{display:none}.pad{height:65px}.minute{height:44px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;color:rgba(255,255,255,.28);font-size:15px;transition:.2s}.minute.on{font-size:23px;color:var(--gold);font-weight:300}.pick-band{position:absolute;left:8%;right:8%;top:65px;height:44px;border-top:1px solid rgba(247,226,160,.35);border-bottom:1px solid rgba(247,226,160,.35);pointer-events:none}.pick-band:after{content:"분";position:absolute;right:-25px;top:7px;color:var(--gold);font-size:11px}
 .submit{width:100%;height:54px;border:0;border-radius:8px;background:var(--gold);color:#172331;margin-top:19px;font-size:15px}.submit:disabled{opacity:.5}.alert{font-size:12px;color:#ffb4a3;min-height:18px;margin:8px 0 0}
-.done{text-align:center;padding:10px 5px 5px}.done-icon{font-size:46px}.done h2{font-size:22px;font-weight:300;margin:12px 0 6px}.done p{font-size:12px;color:var(--muted);line-height:1.9}.done button{margin-top:16px;width:100%;height:52px;border:1px solid rgba(247,226,160,.65);background:transparent;color:var(--gold);border-radius:8px}
+.done{text-align:center;padding:18px 5px 5px}.verse-box{padding:18px 12px 20px;border-top:1px solid rgba(247,226,160,.22);border-bottom:1px solid rgba(247,226,160,.22)}.verse-text{margin:0;color:var(--white);font-size:16px;line-height:2;font-weight:300;word-break:keep-all}.verse-ref{margin-top:14px;color:var(--gold);font-family:var(--sans);font-size:12px;letter-spacing:.08em}.done button{margin-top:20px;width:100%;height:52px;border:1px solid rgba(247,226,160,.65);background:transparent;color:var(--gold);border-radius:8px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(min-width:700px){body{background:#020305}.shell{min-height:900px}.app{border-radius:26px;margin:20px auto;min-height:calc(100svh - 40px);max-height:960px;box-shadow:0 30px 100px #000}.modal-back{align-items:center}.modal{border:1px solid rgba(155,191,216,.3);border-radius:20px}}
 </style>
@@ -128,9 +128,9 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 </section>
 
 <div class="stats">
-  <div class="stat"><div class="label">누적 기도시간</div><div class="value"><span id="totalMinutes">0</span><span class="unit">분</span></div></div>
-  <div class="divider"></div>
   <div class="stat"><div class="label">기도 횟수</div><div class="value"><span id="prayerCount">0</span><span class="unit">회</span></div></div>
+  <div class="divider"></div>
+  <div class="stat"><div class="label">누적 기도시간</div><div class="value"><span id="totalMinutes">0</span><span class="unit">분</span></div></div>
 </div>
 <button class="pray" id="openPrayer"><span class="hands">🙏</span>기도하기</button>
 <div class="progress"><i id="progressBar"></i></div>
@@ -152,9 +152,10 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 
 <div class="modal-back" id="doneModal">
   <section class="modal done" role="dialog" aria-modal="true">
-    <div class="done-icon">🙏</div>
-    <h2>기도가 더해졌습니다.</h2>
-    <p>당신의 기도 한 번이<br>이 집의 한 겹이 되었습니다.</p>
+    <div class="verse-box">
+      <p class="verse-text" id="verseText"></p>
+      <div class="verse-ref" id="verseRef"></div>
+    </div>
     <button id="doneClose">확인</button>
   </section>
 </div>
@@ -170,6 +171,62 @@ var app=$("app"),wrap=$("houseWrap"),logo=$("logo");
 var scroll=$("minuteScroll"),selected=30,timer=null;
 var items=[];
 var localKey="welcome.home.prayers.v3";
+var VERSES=[
+  {ref:"민수기 6:24-26",text:"여호와는 네게 복을 주시고 너를 지키시기를 원하며 여호와는 그의 얼굴을 네게 비추사 은혜 베푸시기를 원하며 여호와는 그 얼굴을 네게로 향하여 드사 평강 주시기를 원하노라"},
+  {ref:"민수기 23:19",text:"하나님은 사람이 아니시니 거짓말을 하지 않으시고 인생이 아니시니 후회가 없으시도다 어찌 그 말씀하신 바를 행하지 않으시며 하신 말씀을 실행하지 않으시랴"},
+  {ref:"신명기 28:12",text:"여호와께서 너를 위하여 하늘의 아름다운 보고를 여시사 네 땅에 때를 따라 비를 내리시고 네 손으로 하는 모든 일에 복을 주시리니"},
+  {ref:"시편 1:3",text:"그는 시냇가에 심은 나무가 철을 따라 열매를 맺으며 그 잎사귀가 마르지 아니함 같으니 그가 하는 모든 일이 다 형통하리로다"},
+  {ref:"시편 23:6",text:"내 평생에 선하심과 인자하심이 반드시 나를 따르리니 내가 여호와의 집에 영원히 살리로다"},
+  {ref:"시편 37:5",text:"네 길을 여호와께 맡기라 그를 의지하면 그가 이루시고"},
+  {ref:"시편 67:6",text:"땅이 그의 소산을 내어 주었으니 하나님 곧 우리 하나님이 우리에게 복을 주시리로다"},
+  {ref:"시편 84:11",text:"여호와 하나님은 해요 방패이시라 여호와께서 은혜와 영화를 주시며 정직하게 행하는 자에게 좋은 것을 아끼지 아니하실 것임이니이다"},
+  {ref:"잠언 3:5-6",text:"너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라 너는 범사에 그를 인정하라 그리하면 네 길을 지도하시리라"},
+  {ref:"잠언 11:30",text:"의인의 열매는 생명 나무라 지혜로운 자는 사람을 얻느니라"},
+  {ref:"이사야 37:31",text:"유다 족속 중에 피하여 남는 자는 다시 아래로 뿌리를 박고 위로 열매를 맺을지라"},
+  {ref:"이사야 43:19",text:"보라 내가 새 일을 행하리니 이제 나타낼 것이라 너희가 그것을 알지 못하겠느냐 반드시 내가 광야에 길을 사막에 강을 내리니"},
+  {ref:"이사야 55:11",text:"내 입에서 나가는 말도 이와 같이 헛되이 내게로 돌아오지 아니하고 나의 기뻐하는 뜻을 이루며 내가 보낸 일에 형통함이니라"},
+  {ref:"이사야 55:12",text:"너희는 기쁨으로 나아가며 평안히 인도함을 받을 것이요 산들과 언덕들이 너희 앞에서 노래를 발하고 들의 모든 나무가 손뼉을 칠 것이며"},
+  {ref:"예레미야 17:7-8",text:"그러나 무릇 여호와를 의지하며 여호와를 의뢰하는 그 사람은 복을 받을 것이라 그는 물 가에 심어진 나무가 그 뿌리를 강변에 뻗치고 더위가 올지라도 두려워하지 아니하며 그 잎이 청청하며 가무는 해에도 걱정이 없고 결실이 그치지 아니함 같으리라"},
+  {ref:"에스겔 47:12",text:"그 나무에 먹을 만한 각종 과실나무가 자라서 그 열매가 끊이지 아니하고 달마다 새 열매를 맺으리니 이는 그 물이 성소를 통하여 나옴이라 그 열매는 먹을 만하고 그 잎사귀는 약재료가 되리라"},
+  {ref:"마태복음 3:8",text:"그러므로 회개에 합당한 열매를 맺고"},
+  {ref:"마태복음 9:37-38",text:"이에 제자들에게 이르시되 추수할 것은 많되 일꾼이 적으니 그러므로 추수하는 주인에게 청하여 추수할 일꾼들을 보내 주소서 하라 하시니라"},
+  {ref:"마태복음 13:23",text:"좋은 땅에 뿌려졌다는 것은 말씀을 듣고 깨닫는 자니 결실하여 어떤 것은 백 배, 어떤 것은 육십 배, 어떤 것은 삼십 배가 되느니라 하시더라"},
+  {ref:"마태복음 18:14",text:"이와 같이 이 작은 자 중의 하나라도 잃어버리는 것은 하늘에 계신 너희 아버지의 뜻이 아니니라"},
+  {ref:"마태복음 28:19-20",text:"그러므로 너희는 가서 모든 민족을 제자로 삼아 아버지와 아들과 성령의 이름으로 세례를 베풀고 내가 너희에게 분부한 모든 것을 가르쳐 지키게 하라 볼지어다 내가 세상 끝날까지 너희와 항상 함께 있으리라 하시니라"},
+  {ref:"마가복음 1:15",text:"이르시되 때가 찼고 하나님의 나라가 가까이 왔으니 회개하고 복음을 믿으라 하시더라"},
+  {ref:"마가복음 4:20",text:"좋은 땅에 뿌려졌다는 것은 곧 말씀을 듣고 받아 삼십 배나 육십 배나 백 배의 결실을 하는 자니라"},
+  {ref:"누가복음 15:7",text:"내가 너희에게 이르노니 이와 같이 죄인 한 사람이 회개하면 하늘에서는 회개할 것 없는 의인 아흔아홉으로 말미암아 기뻐하는 것보다 더하리라"},
+  {ref:"누가복음 19:10",text:"인자가 온 것은 잃어버린 자를 찾아 구원하려 함이니라"},
+  {ref:"요한복음 3:16",text:"하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 그를 믿는 자마다 멸망하지 않고 영생을 얻게 하려 하심이라"},
+  {ref:"요한복음 4:35",text:"너희는 넉 달이 지나야 추수할 때가 이르겠다 하지 아니하느냐 그러나 나는 너희에게 이르노니 너희 눈을 들어 밭을 보라 희어져 추수하게 되었도다"},
+  {ref:"요한복음 10:10",text:"내가 온 것은 양으로 생명을 얻게 하고 더 풍성히 얻게 하려는 것이라"},
+  {ref:"요한복음 12:24",text:"내가 진실로 진실로 너희에게 이르노니 한 알의 밀이 땅에 떨어져 죽지 아니하면 한 알 그대로 있고 죽으면 많은 열매를 맺느니라"},
+  {ref:"요한복음 15:5",text:"나는 포도나무요 너희는 가지라 그가 내 안에, 내가 그 안에 거하면 사람이 열매를 많이 맺나니 나를 떠나서는 너희가 아무 것도 할 수 없음이라"},
+  {ref:"요한복음 15:8",text:"너희가 열매를 많이 맺으면 내 아버지께서 영광을 받으실 것이요 너희는 내 제자가 되리라"},
+  {ref:"사도행전 1:8",text:"오직 성령이 너희에게 임하시면 너희가 권능을 받고 예루살렘과 온 유대와 사마리아와 땅 끝까지 이르러 내 증인이 되리라 하시니라"},
+  {ref:"사도행전 4:12",text:"다른 이로써는 구원을 받을 수 없나니 천하 사람 중에 구원을 받을 만한 다른 이름을 우리에게 주신 일이 없음이라"},
+  {ref:"사도행전 16:31",text:"이르되 주 예수를 믿으라 그리하면 너와 네 집이 구원을 받으리라 하고"},
+  {ref:"로마서 1:16",text:"내가 복음을 부끄러워하지 아니하노니 이 복음은 모든 믿는 자에게 구원을 주시는 하나님의 능력이 됨이라 먼저는 유대인에게요 그리고 헬라인에게로다"},
+  {ref:"로마서 10:13",text:"누구든지 주의 이름을 부르는 자는 구원을 받으리라"},
+  {ref:"로마서 10:14-15",text:"그런즉 그들이 믿지 아니하는 이를 어찌 부르리요 듣지도 못한 이를 어찌 믿으리요 전파하는 자가 없이 어찌 들으리요 보내심을 받지 아니하였으면 어찌 전파하리요 기록된 바 아름답도다 좋은 소식을 전하는 자들의 발이여 함과 같으니라"},
+  {ref:"고린도전서 3:6-7",text:"나는 심었고 아볼로는 물을 주었으되 오직 하나님께서 자라나게 하셨나니 그런즉 심는 이나 물 주는 이는 아무 것도 아니로되 오직 자라게 하시는 이는 하나님뿐이니라"},
+  {ref:"고린도전서 15:58",text:"그러므로 내 사랑하는 형제들아 견실하며 흔들리지 말고 항상 주의 일에 더욱 힘쓰는 자들이 되라 이는 너희 수고가 주 안에서 헛되지 않은 줄 앎이라"},
+  {ref:"고린도후서 5:17",text:"그런즉 누구든지 그리스도 안에 있으면 새로운 피조물이라 이전 것은 지나갔으니 보라 새 것이 되었도다"},
+  {ref:"고린도후서 5:20",text:"그러므로 우리가 그리스도를 대신하여 사신이 되어 하나님이 우리를 통하여 너희를 권면하시는 것 같이 그리스도를 대신하여 간청하노니 너희는 하나님과 화목하라"},
+  {ref:"갈라디아서 6:9",text:"우리가 선을 행하되 낙심하지 말지니 포기하지 아니하면 때가 이르매 거두리라"},
+  {ref:"빌립보서 1:6",text:"너희 안에서 착한 일을 시작하신 이가 그리스도 예수의 날까지 이루실 줄을 우리는 확신하노라"},
+  {ref:"골로새서 1:10",text:"주께 합당하게 행하여 범사에 기쁘시게 하고 모든 선한 일에 열매를 맺게 하시며 하나님을 아는 것에 자라게 하시고"},
+  {ref:"디모데전서 2:4",text:"하나님은 모든 사람이 구원을 받으며 진리를 아는 데에 이르기를 원하시느니라"},
+  {ref:"베드로후서 3:9",text:"주의 약속은 어떤 이들이 더디다고 생각하는 것 같이 더딘 것이 아니라 오직 주께서는 너희를 대하여 오래 참으사 아무도 멸망하지 아니하고 다 회개하기에 이르기를 원하시느니라"},
+  {ref:"요한일서 4:14",text:"아버지가 아들을 세상의 구주로 보내신 것을 우리가 보았고 또 증언하노니"},
+  {ref:"요한계시록 21:5",text:"보좌에 앉으신 이가 이르시되 보라 내가 만물을 새롭게 하노라 하시고 또 이르시되 이 말은 신실하고 참되니 기록하라 하시고"}
+];
+function showRandomVerse(){
+  var v=VERSES[Math.floor(Math.random()*VERSES.length)];
+  $("verseText").textContent=v.text;
+  $("verseRef").textContent=v.ref;
+}
+
 
 function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function setStats(minutes,count){
@@ -258,7 +315,7 @@ $("submit").addEventListener("click",function(){
   if(!name){$("alert").textContent="이름을 입력해주세요.";return}
   btn.disabled=true;btn.textContent="올리는 중…";
   postPrayer({name:name,minutes:selected,topic:topic})
-    .then(function(){closeModal();$("doneModal").classList.add("open")})
+    .then(function(){closeModal();showRandomVerse();$("doneModal").classList.add("open")})
     .catch(function(e){$("alert").textContent=e.message||"저장에 실패했습니다."})
     .then(function(){btn.disabled=false;btn.textContent="기도 올리기"});
 });
