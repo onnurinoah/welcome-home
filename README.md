@@ -1,31 +1,42 @@
-# Welcome Home — 기도로 짓는 집
+# Welcome HOME — 기도로 짓는 집
 
-기도 시간이 쌓일수록 청사진 위에 집이 한 획씩 완성되는 CH PLUS **Welcome Home** 기도 페이지입니다.
+CH PLUS **Welcome HOME** 기도 페이지입니다. 스마트폰 화면을 기준으로 설계했으며, 기도가 쌓일수록 검은 화면에서 청사진 색이 살아나고 집의 선이 완성됩니다. 목표가 모두 채워지면 청사진이 따뜻한 3D 하우스로 전환됩니다.
 
-## 구조
+## 현재 구조
 
-- `prayer/index.html` — 모바일 중심 기도 페이지
-- `prayer/server/Code.gs` — Google Apps Script 누적 서버
-- `prayer/server/supabase.sql` — Supabase 대체 스키마
+- `index.html` — 모바일 메인 페이지 + 기도 입력 모달
+- `server/Code.gs` — Google Apps Script 누적 서버
+- `server/supabase.sql` — 기존 Supabase 대체 스키마
 
-## 동작
+## 화면 흐름
 
-- 목표: 1000시간
-- 화면에는 누적 시간 숫자를 직접 표시하지 않고, 기도량에 따라 집의 도면이 아래에서 위로 그려집니다.
-- 0%에 가까운 구간은 의도적으로 오래 비워 두어 첫 기도의 변화가 보이도록 했습니다.
-- 진행 단계에 따라 "첫 선이 집의 시작이 됩니다" → "기도가 한 겹씩 집을 세우고 있습니다" 등의 문구가 바뀝니다.
-- 100%가 되면 청사진이 입체적인 집으로 전환되고 창에 따뜻한 빛이 켜집니다.
+1. 검은 화면에서 시작
+2. 기도 누적량에 따라 청사진 컬러와 집의 선이 점점 선명해짐
+3. 메인 화면에 **누적 기도시간(분)**과 **기도 횟수**가 표시됨
+4. 🙏 **기도하기**를 누르면 이름 / 기도시간 / 기도제목(선택) 입력
+5. 기도시간은 **1~180분, 1분 단위 스크롤 선택**
+6. 목표인 **1000시간(60,000분)**에 도달하면 3D 스타일의 완성된 집으로 전환
 
-## Apps Script 연결
+## Google Apps Script
 
-1. Google 스프레드시트에서 **확장 프로그램 → Apps Script**를 엽니다.
-2. `prayer/server/Code.gs` 내용을 붙여넣습니다.
-3. **배포 → 새 배포 → 웹 앱**으로 배포합니다.
-4. 실행 계정은 **나**, 접근 권한은 **모든 사용자**로 설정합니다.
-5. 배포된 웹 앱 URL을 페이지의 `SERVER_URL`에 넣거나, 접속 URL 뒤에 `?server=웹앱URL`을 붙입니다.
+1. Google 스프레드시트 → **확장 프로그램 → Apps Script**
+2. `server/Code.gs` 내용을 붙여넣기
+3. **배포 → 배포 관리 → 새 버전**으로 업데이트하거나 새 웹 앱 배포
+4. 실행 계정: **나**
+5. 액세스 권한: **모든 사용자**
+6. 웹 앱 URL을 `index.html`의 `SERVER_URL`에 입력
 
-Apps Script는 기도제목·마음의 감동·이름을 Google Sheet에 저장하고, 공개 화면에는 누적 시간만 반환합니다. 누적 합계는 Script Properties에 캐시하여 매 조회마다 전체 행을 다시 계산하지 않습니다.
+### 주의
 
-## Supabase
+이번 디자인 개편으로 Apps Script의 저장 형식도 바뀌었습니다.
 
-`prayer/server/supabase.sql`을 SQL Editor에서 실행한 뒤 Project URL과 anon public key를 페이지의 `SUPABASE` 설정에 넣으면 사용할 수 있습니다.
+- `minutes`: 기도 시간(분)
+- `name`: 이름
+- `topic`: 선택 기도제목
+- GET 응답: `minutes`, `count`
+
+기존 배포본을 사용 중이라면 **Apps Script 코드를 교체한 뒤 반드시 새 버전으로 재배포**해야 합니다.
+
+## 목표
+
+**당신의 기도가 이 집을 짓습니다.**
