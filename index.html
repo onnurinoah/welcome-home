@@ -1,34 +1,276 @@
-<title>기도로 짓는 집</title>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05070b">
+<title>Welcome HOME — 기도로 짓는 집</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italianno&family=Jost:wght@200;300;400&family=Noto+Sans+KR:wght@200;300;400&display=swap">
-<meta name="theme-color" content="#060910">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Jost:wght@200;300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--night:#060910;--paper:#7D91B3;--line:#CBD8EC;--gold:#F3DFA2;--cream:#EDF1F7;--muted:rgba(237,241,247,.52);--r-wall:#EFE7D8;--r-wall-s:#CCC2AE;--r-roof:#4C5872;--r-roof-top:#5E6C88;--r-roof-s:#343E54;--r-win:#F6CC55;--r-door:#6F4B2E;--r-step:#DCD3C1;--r-chim:#8D6C54;--r-ink:#333E52;--r-ground:#DCD6C8;--script:"Italianno",cursive;--sans:"Jost","Noto Sans KR",system-ui,sans-serif;--kr:"Noto Sans KR","Jost",system-ui,sans-serif}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%}body{margin:0;background:var(--night);color:var(--cream);font-family:var(--kr);font-weight:300;line-height:1.7;transition:background-color 1.6s ease;overscroll-behavior:none}body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.45;background:repeating-linear-gradient(103deg,rgba(255,255,255,.03) 0 1px,transparent 1px 6px),repeating-linear-gradient(7deg,rgba(0,0,0,.045) 0 1px,transparent 1px 8px)}.view[hidden]{display:none!important}body.bright{--gold:#8A6714;--cream:#242F44;--muted:rgba(36,47,68,.64);--line:#5B6E8C}.wm span,.cta,.verse,.rule{transition:color 1.8s ease,border-color 1.8s ease,background-color 1.8s ease}
-#view-house{min-height:100svh;display:flex;flex-direction:column;padding:max(18px,env(safe-area-inset-top)) 22px max(20px,env(safe-area-inset-bottom))}.wm{text-align:center;flex:0 0 auto;padding-top:4px}.wm .w{font-family:var(--script);font-size:clamp(66px,20vw,118px);line-height:.72;color:var(--gold);display:block}.wm .h{font-family:var(--sans);font-weight:200;font-size:clamp(23px,7.4vw,42px);letter-spacing:.3em;color:var(--gold);display:block;margin-top:-.34em;padding-left:.3em}.rule{width:34px;height:1px;background:var(--gold);opacity:.5;margin:15px auto 0;flex:0 0 auto}.verse{flex:0 0 auto;text-align:center;margin:15px auto 0;font-size:12.5px;line-height:1.85;color:var(--muted);max-width:31ch;letter-spacing:.005em}.verse em{display:block;font-style:normal;font-family:var(--sans);font-size:10px;letter-spacing:.2em;margin-top:9px;opacity:.75}.stage{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center}.stage-inner{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}.stage svg{width:100%;height:auto;max-height:100%;display:block}.stage-caption{margin:4px 0 0;min-height:22px;text-align:center;font-size:11px;letter-spacing:.08em;color:var(--muted);opacity:.78;transition:color 1.8s ease,opacity 1.2s ease}body.bright .stage-caption{color:var(--gold);opacity:.92}.cta{flex:0 0 auto;margin-top:16px;width:100%;min-height:56px;font-family:var(--kr);font-weight:300;font-size:15.5px;letter-spacing:.09em;color:var(--gold);background:transparent;border:1px solid currentColor;border-radius:1px;cursor:pointer}.cta:active{opacity:.6}
-#view-form,#view-done{min-height:100svh;display:flex;flex-direction:column;padding:max(16px,env(safe-area-inset-top)) 22px max(20px,env(safe-area-inset-bottom))}.back{flex:0 0 auto;align-self:flex-start;background:none;border:none;color:var(--muted);font-family:var(--sans);font-size:11px;letter-spacing:.2em;cursor:pointer;padding:12px 2px;min-height:44px}.sheet{flex:1 1 auto;display:flex;flex-direction:column;gap:30px;padding:10px 0 6px}.head h1{font-family:var(--kr);font-weight:200;font-size:25px;letter-spacing:-.01em;margin:0;line-height:1.45}.head h1 b{font-weight:400;color:var(--gold)}.head .rule{margin:16px 0 0;width:26px}.lede{margin:14px 0 0;font-size:13px;color:var(--muted);line-height:1.85}.field{display:flex;flex-direction:column;gap:11px}.field label{font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);opacity:.85}.field .sub{font-size:11.5px;color:var(--muted);margin:-6px 0 0;letter-spacing:.01em}textarea,input[type=text]{font-family:var(--kr);font-weight:300;font-size:16px;color:var(--cream);background:transparent;border:none;border-bottom:1px solid rgba(203,216,236,.22);border-radius:0;padding:10px 0;width:100%;resize:vertical;line-height:1.8}textarea::placeholder,input::placeholder{color:rgba(237,241,247,.26)}textarea:focus,input:focus{outline:none;border-bottom-color:var(--gold)}textarea{min-height:76px}.picker{position:relative;height:198px;flex:0 0 auto}.pscroll{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 26%,#000 74%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 26%,#000 74%,transparent 100%)}.pscroll::-webkit-scrollbar{display:none}.pscroll:focus-visible{outline:1px solid var(--gold);outline-offset:4px}.pad{height:77px}.pitem{height:44px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;font-size:16px;color:var(--muted);letter-spacing:.02em;transition:color .22s ease,font-size .22s ease,opacity .22s ease;opacity:.65;cursor:pointer}.pitem.on{color:var(--gold);font-size:22px;opacity:1;font-weight:200}.pband{position:absolute;left:-4px;right:-4px;top:77px;height:44px;pointer-events:none;border-top:1px solid rgba(243,223,162,.32);border-bottom:1px solid rgba(243,223,162,.32)}.pband:before,.pband:after{content:"";position:absolute;width:5px;height:1px;background:var(--gold);opacity:.75}.pband:before{left:0;top:-1px}.pband:after{right:0;bottom:-1px}.submit{flex:0 0 auto;margin-top:6px;width:100%;min-height:56px;font-family:var(--kr);font-weight:300;font-size:15.5px;letter-spacing:.09em;color:#241C05;background:var(--gold);border:none;border-radius:1px;cursor:pointer}.submit[disabled]{opacity:.45;cursor:progress}.note{margin:0;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.8}.alert{margin:0;font-size:13px;line-height:1.75;color:var(--gold);border-left:1px solid currentColor;padding:8px 13px}.alert[hidden]{display:none}.alert.bad{color:#EBA48F}#view-done{justify-content:center;text-align:center;gap:20px}.done-mark{font-family:var(--script);font-size:72px;color:var(--gold);line-height:.85}.done-msg{margin:0;font-size:17px;line-height:1.85;letter-spacing:.01em}.done-sub{margin:0;font-size:13px;color:var(--muted);line-height:1.9;max-width:28ch;margin-inline:auto}.done-actions{display:flex;flex-direction:column;gap:11px;margin-top:10px}
-.grid-bg line{stroke:var(--line);stroke-width:.4}#sheet path,#sheet line{fill:none;stroke:var(--line);stroke-width:.7}#sheet text{fill:var(--line);font-family:var(--sans);font-weight:300}#sheet,#dims{transition:opacity 1.6s ease}#house path{fill:transparent;stroke:var(--line);stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter;transition:fill 2s ease,stroke 2s ease,stroke-width 2s ease}#house path.thin{stroke-width:1.05}#house path.bold{stroke-width:2.15}#solid path{stroke:none;opacity:0}#glow,#ground{opacity:0;transition:opacity 2.2s ease}svg.real .grid-bg,svg.real #sheet,svg.real #dims{opacity:0}svg.real #glow,svg.real #ground{opacity:1}svg.real #glow{animation:houseGlow 3.8s ease-in-out infinite}@keyframes houseGlow{0%,100%{opacity:.72}50%{opacity:1}}svg.real #house path{stroke:var(--r-ink);stroke-width:.95}svg.real #house path.wall{fill:var(--r-wall)}svg.real #house path.roof,svg.real #house path.dormer{fill:var(--r-roof)}svg.real #house path.chim{fill:var(--r-chim)}svg.real #house path.win{fill:var(--r-win)}svg.real #house path.door{fill:var(--r-door)}svg.real #house path.step{fill:var(--r-step)}svg.real #house path.cornice{fill:#E2D9C6}svg.real #house path.mull{stroke:rgba(51,62,82,.45)}@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}svg.real #glow{animation:none!important}}@media (min-width:700px){#view-house,#view-form,#view-done{max-width:500px;margin-inline:auto}}
+:root{
+ --bg:#05070b;--blue:#183550;--blue2:#5f86a8;--line:#9ab9d2;--gold:#f7e2a0;
+ --white:#f7f7f4;--muted:rgba(247,247,244,.58);--card:rgba(13,31,49,.88);
+ --sans:Jost,"Noto Sans KR",sans-serif;--kr:"Noto Sans KR",sans-serif;--script:Italianno,cursive;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:#05070b}
+body{font-family:var(--kr);color:var(--white);font-weight:300;overflow-x:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.2;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 5px)}
+.app{min-height:100svh;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 45%,rgba(36,76,108,.2),transparent 48%),var(--bg);transition:background 1.8s ease}
+.app[data-p="1"]{background:radial-gradient(circle at 50% 46%,rgba(97,137,168,.36),transparent 54%),#5d7e9b}
+.shell{width:min(100%,520px);min-height:100svh;margin:auto;padding:22px 20px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;position:relative;z-index:2}
+.top{display:flex;justify-content:center;align-items:center;padding-top:4px}
+.logo{text-align:center;line-height:.78;opacity:.15;transform:translateY(4px) scale(.97);transition:opacity 1.8s,transform 1.8s}
+.logo.ready{opacity:1;transform:none}
+.logo .welcome{font-family:var(--script);font-size:clamp(67px,21vw,105px);color:var(--gold)}
+.logo .home{font-family:var(--sans);font-size:clamp(23px,7vw,34px);letter-spacing:.24em;color:var(--gold);padding-left:.24em;margin-top:-7px}
+.logo .tag{font-family:var(--sans);font-size:7px;letter-spacing:.3em;color:rgba(247,226,160,.72);margin-top:13px}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
+.house-wrap{width:min(100%,440px);aspect-ratio:1/1;position:relative;display:grid;place-items:center}
+.blueprint,.realhouse{position:absolute;inset:0;width:100%;height:100%}
+.blueprint{opacity:.04;transform:scale(.92);transition:opacity 1.7s,transform 2s}
+.realhouse{opacity:0;transform:scale(.91) translateY(8px);transition:opacity 2.4s,transform 2.4s}
+.house-wrap.final .blueprint{opacity:0}
+.house-wrap.final .realhouse{opacity:1;transform:scale(1) translateY(0)}
+.bp-grid{stroke:rgba(176,205,226,.18);stroke-width:.5}
+.bp-line{fill:none;stroke:var(--line);stroke-width:1.1;vector-effect:non-scaling-stroke}
+.bp-fine{fill:none;stroke:rgba(171,202,224,.62);stroke-width:.65;vector-effect:non-scaling-stroke}
+.bp-glow{fill:none;stroke:#d9ecff;stroke-width:2.5;opacity:.18;filter:blur(3px)}
+.house-fill{fill:url(#wall)}
+.roof-fill{fill:url(#roof)}
+.window-fill{fill:#f8dc80;filter:url(#light)}
+.ground{fill:url(#ground)}
+.stage-copy{position:absolute;bottom:3%;left:0;right:0;text-align:center;pointer-events:none}
+.stage-copy strong{display:block;font-size:13px;letter-spacing:.06em;font-weight:300;opacity:.9}
+.stage-copy span{display:block;margin-top:4px;font-family:var(--sans);font-size:9px;letter-spacing:.18em;color:var(--muted)}
+.stats{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;width:100%;margin:0 0 17px}
+.stat{text-align:center}.stat .label{font-size:10px;color:var(--muted);letter-spacing:.12em}.stat .value{margin-top:3px;font-family:var(--sans);font-size:30px;font-weight:300;color:var(--gold);line-height:1}.stat .unit{font-size:12px;margin-left:3px;color:var(--gold)}.divider{width:1px;height:34px;background:rgba(255,255,255,.18)}
+.pray{width:100%;height:60px;border:1px solid rgba(247,226,160,.7);background:rgba(247,226,160,.96);color:#172331;font-size:16px;letter-spacing:.06em;border-radius:2px;box-shadow:0 12px 34px rgba(0,0,0,.2);transition:transform .15s}
+.pray:active{transform:scale(.985)}
+.pray .hands{font-size:22px;vertical-align:-2px;margin-right:8px}
+.progress{height:2px;background:rgba(255,255,255,.1);margin:14px 0 0;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--gold);transition:width 1.4s ease}
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(12px);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.modal-back.open{display:flex}
+.modal{width:min(100%,520px);background:linear-gradient(180deg,#102d48,#091827);border:1px solid rgba(155,191,216,.3);border-bottom:0;border-radius:20px 20px 0 0;padding:22px 20px max(24px,env(safe-area-inset-bottom));box-shadow:0 -20px 60px rgba(0,0,0,.45);animation:up .28s ease}
+@keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:19px}.modal-title{font-size:20px;font-weight:400}.modal-title span{font-size:22px;margin-right:7px}.close{border:0;background:none;color:var(--muted);font-size:24px;padding:4px 2px}
+.field{margin-top:16px}.field label{display:block;font-size:11px;letter-spacing:.13em;color:var(--gold);margin-bottom:8px}.field input,.field textarea{width:100%;border:1px solid rgba(170,200,220,.22);background:rgba(255,255,255,.06);color:#fff;border-radius:8px;padding:13px 14px;outline:none}.field input:focus,.field textarea:focus{border-color:rgba(247,226,160,.7)}.field textarea{height:70px;resize:none}.optional{font-size:9px;color:var(--muted);letter-spacing:0;margin-left:5px}
+.picker{height:174px;position:relative;margin:3px -3px 0}.scroll{height:100%;overflow:auto;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-mask-image:linear-gradient(180deg,transparent,#000 27%,#000 73%,transparent)}.scroll::-webkit-scrollbar{display:none}.pad{height:65px}.minute{height:44px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;color:rgba(255,255,255,.28);font-size:15px;transition:.2s}.minute.on{font-size:23px;color:var(--gold);font-weight:300}.pick-band{position:absolute;left:8%;right:8%;top:65px;height:44px;border-top:1px solid rgba(247,226,160,.35);border-bottom:1px solid rgba(247,226,160,.35);pointer-events:none}.pick-band:after{content:"분";position:absolute;right:-25px;top:7px;color:var(--gold);font-size:11px}
+.submit{width:100%;height:54px;border:0;border-radius:8px;background:var(--gold);color:#172331;margin-top:19px;font-size:15px}.submit:disabled{opacity:.5}.alert{font-size:12px;color:#ffb4a3;min-height:18px;margin:8px 0 0}
+.done{text-align:center;padding:10px 5px 5px}.done-icon{font-size:46px}.done h2{font-size:22px;font-weight:300;margin:12px 0 6px}.done p{font-size:12px;color:var(--muted);line-height:1.9}.done button{margin-top:16px;width:100%;height:52px;border:1px solid rgba(247,226,160,.65);background:transparent;color:var(--gold);border-radius:8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:700px){body{background:#020305}.shell{min-height:900px}.app{border-radius:26px;margin:20px auto;min-height:calc(100svh - 40px);max-height:960px;box-shadow:0 30px 100px #000}.modal-back{align-items:center}.modal{border:1px solid rgba(155,191,216,.3);border-radius:20px}}
 </style>
-<section class="view" id="view-house"><div class="wm"><span class="w">Welcome</span><span class="h">HOME</span></div><div class="rule"></div><p class="verse">그러나 그때는 하나님에게서 멀리 떨어져 있던 여러분이 이제는 그리스도 예수 안에서 그리스도의 피로 가까워졌습니다<em>EPHESIANS 2:13</em></p><div class="stage"><div class="stage-inner"><svg id="blueprint" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="bp-t bp-d"><title id="bp-t">기도로 짓는 집</title><desc id="bp-d">기도 시간이 쌓일수록 빈 도면 위에 집이 아래에서 위로 그려지고, 다 채워지면 도면이 실제로 지어진 집이 됩니다.</desc><defs><radialGradient id="g-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F6CC55" stop-opacity=".42"/><stop offset="1" stop-color="#F6CC55" stop-opacity="0"/></radialGradient></defs><g class="grid-bg" id="grid" opacity="0"></g><g id="sheet" opacity=".1"><path d="M14 14 H386 V306 H14 Z"/><path d="M14 30 V14 H30" class="tick"/><path d="M370 14 H386 V30"/><path d="M386 290 V306 H370"/><path d="M30 306 H14 V290"/><path d="M262 262 H386 M262 262 V306 M262 280 H386"/><text x="270" y="275" font-size="7.5" letter-spacing="1.6">WELCOME HOME</text><text x="270" y="291" font-size="5.4" letter-spacing="1.1" opacity=".8">FRONT ELEVATION</text><text x="270" y="301" font-size="5.4" letter-spacing="1.1" opacity=".8">SCALE 1:100</text></g><g id="draw" transform="translate(22,15) scale(0.8)"><g id="ground"></g><g id="solid"></g><g id="glow"></g><g id="house"></g><g id="dims" opacity="0"></g></g></svg><p class="stage-caption" id="stage-caption" aria-live="polite">첫 기도를 기다리고 있습니다.</p></div></div><button class="cta" type="button" id="pray-open">기도로 이 집을 함께 짓기</button></section>
-<section class="view" id="view-form" hidden><button class="back" type="button" id="form-back">&larr; BACK</button><div class="sheet"><div class="head"><h1>이 집은 <b>기도</b>로<br>지어집니다.</h1><div class="rule"></div><p class="lede">드리실 기도의 제목과, 그 가운데 주신 마음의 감동을 남겨주세요. 드린 시간만큼 도면의 선이 한 겹 더 그려집니다.</p></div><p class="alert" id="form-alert" hidden></p><div class="field"><label for="f-topic">기도제목</label><textarea id="f-topic" maxlength="500" placeholder="무엇을 위해 기도하시겠습니까?"></textarea></div><div class="field"><label for="f-heart">마음의 감동</label><p class="sub">선택 — 기도 중에 주신 마음이 있다면</p><textarea id="f-heart" maxlength="500"></textarea></div><div class="field"><label>기도 시간</label><div class="picker"><div class="pscroll" id="pscroll" tabindex="0" role="listbox" aria-label="기도 시간 선택"></div><div class="pband"></div></div></div><div class="field"><label for="f-name">이름</label><p class="sub">선택</p><input type="text" id="f-name" maxlength="30" autocomplete="off"></div><button class="submit" type="button" id="f-submit">기도 올려드리기</button><p class="note">남겨주신 기도제목은 기도팀이 함께 품습니다.</p></div></section>
-<section class="view" id="view-done" hidden><div class="done-mark">Amen</div><p class="done-msg">기도가 이 집에 더해졌습니다.</p><p class="done-sub">당신의 기도도 한 겹의 선이 되었습니다.<br>함께 드린 기도가 이 집을 세웁니다.</p><div class="done-actions"><button class="cta" type="button" id="done-again">한 번 더 기도하기</button><button class="cta" type="button" id="done-home" style="color:var(--muted)">집 보러 가기</button></div></section>
+</head>
+<body>
+<main class="app" id="app" data-p="0">
+<div class="shell">
+<header class="top">
+  <div class="logo" id="logo"><div class="welcome">Welcome</div><div class="home">HOME</div><div class="tag">CH PLUS+ · CHANGING HEART · CHANGING HISTORY</div></div>
+</header>
+
+<section class="stage">
+  <div class="house-wrap" id="houseWrap">
+    <svg class="blueprint" viewBox="0 0 400 400" aria-label="기도가 쌓일수록 완성되는 집 청사진">
+      <defs>
+        <linearGradient id="bpSky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7fa5c3" stop-opacity=".2"/><stop offset="1" stop-color="#274a66" stop-opacity="0"/></linearGradient>
+      </defs>
+      <rect width="400" height="400" fill="url(#bpSky)" opacity=".15"/>
+      <g class="bp-grid">
+        <path d="M20 40H380M20 80H380M20 120H380M20 160H380M20 200H380M20 240H380M20 280H380M20 320H380M20 360H380M40 20V380M80 20V380M120 20V380M160 20V380M200 20V380M240 20V380M280 20V380M320 20V380M360 20V380"/>
+      </g>
+      <g id="bpHouse">
+        <path class="bp-glow" d="M65 325V205H335V325M35 205L200 72L365 205M105 205V155L140 125H260L295 155V205"/>
+        <path class="bp-line" pathLength="1000" id="line-main" d="M65 325V205H335V325M35 205L200 72L365 205M105 205V155L140 125H260L295 155V205M95 325V245H150V325M250 325V245H305V325M175 325V250H225V325M105 205H295M105 225H295M120 225V325M280 225V325M170 155H230V205H170ZM185 205V155M215 205V155M185 280H215V325H185ZM170 280H230"/>
+        <path class="bp-fine" d="M75 325H325M50 215H350M130 145H270M130 155H270M145 125V105M255 125V105M140 105H260M135 105L145 92L155 105M245 105L255 92L265 105"/>
+        <g class="bp-fine" opacity=".75">
+          <path d="M105 250H140M105 270H140M105 290H140M260 250H295M260 270H295M260 290H295"/>
+          <path d="M115 245V305M130 245V305M270 245V305M285 245V305"/>
+        </g>
+      </g>
+    </svg>
+
+    <svg class="realhouse" viewBox="0 0 400 400" aria-hidden="true">
+      <defs>
+        <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#eee7d8"/><stop offset="1" stop-color="#cfc4af"/></linearGradient>
+        <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#596981"/><stop offset="1" stop-color="#263347"/></linearGradient>
+        <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4a5868"/><stop offset="1" stop-color="#182331"/></linearGradient>
+        <filter id="light"><feGaussianBlur stdDeviation="2"/></filter>
+        <radialGradient id="skyGlow"><stop stop-color="#f9e08a" stop-opacity=".55"/><stop offset="1" stop-color="#f9e08a" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse cx="200" cy="300" rx="145" ry="60" fill="url(#skyGlow)" opacity=".35"/>
+      <path class="ground" d="M38 325H362L330 365H70Z"/>
+      <path class="house-fill" d="M67 323V205H333V323Z"/>
+      <path class="roof-fill" d="M38 205L200 73L362 205H328L200 104L72 205Z"/>
+      <path class="roof-fill" d="M113 171V132L143 108H257L287 132V171Z"/>
+      <path fill="#d2c7b5" d="M108 199H292V209H108Z"/>
+      <path fill="#7d6a57" d="M132 105V55H148V105ZM252 105V55H268V105Z"/>
+      <path fill="#8d7157" d="M128 54H152V59H128ZM248 54H272V59H248Z"/>
+      <g fill="#f7d96e">
+        <rect x="92" y="236" width="42" height="48" rx="2"/><rect x="154" y="236" width="42" height="48" rx="2"/>
+        <rect x="204" y="236" width="42" height="48" rx="2"/><rect x="266" y="236" width="42" height="48" rx="2"/>
+        <path d="M166 184Q166 150 200 150T234 184V205H166Z"/>
+      </g>
+      <g stroke="#675f55" stroke-width="3" opacity=".48">
+        <path d="M113 236V284M92 260H134M175 236V284M154 260H196M225 236V284M204 260H246M287 236V284M266 260H308"/>
+      </g>
+      <path fill="#66462e" d="M181 323V267Q181 242 200 242T219 267V323Z"/>
+      <circle cx="214" cy="285" r="2.8" fill="#f6d36c"/>
+      <path fill="#d9cfbd" d="M174 323H226L232 330H168Z"/>
+      <path fill="#d9cfbd" d="M169 330H231L237 337H163Z"/>
+      <g fill="#718b62"><circle cx="70" cy="320" r="13"/><circle cx="330" cy="320" r="13"/><circle cx="52" cy="331" r="9"/><circle cx="348" cy="331" r="9"/></g>
+    </svg>
+    <div class="stage-copy"><strong id="stageTitle">첫 기도를 기다리고 있습니다.</strong><span id="stageSub">PRAY · BUILD · WELCOME</span></div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="label">누적 기도시간</div><div class="value"><span id="totalMinutes">0</span><span class="unit">분</span></div></div>
+  <div class="divider"></div>
+  <div class="stat"><div class="label">기도 횟수</div><div class="value"><span id="prayerCount">0</span><span class="unit">회</span></div></div>
+</div>
+<button class="pray" id="openPrayer"><span class="hands">🙏</span>기도하기</button>
+<div class="progress"><i id="progressBar"></i></div>
+</div>
+</main>
+
+<div class="modal-back" id="prayerModal">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><div class="modal-title" id="modalTitle"><span>🙏</span>기도하기</div><button class="close" id="closeModal" aria-label="닫기">×</button></div>
+    <div class="field"><label for="name">이름</label><input id="name" maxlength="30" autocomplete="name" placeholder="이름을 입력해주세요"></div>
+    <div class="field"><label>기도시간</label>
+      <div class="picker"><div class="scroll" id="minuteScroll" tabindex="0" role="listbox" aria-label="기도시간"></div><div class="pick-band"></div></div>
+    </div>
+    <div class="field"><label for="topic">기도제목 <span class="optional">선택</span></label><textarea id="topic" maxlength="500" placeholder="기도제목을 남겨주세요"></textarea></div>
+    <p class="alert" id="alert"></p>
+    <button class="submit" id="submit">기도 올리기</button>
+  </section>
+</div>
+
+<div class="modal-back" id="doneModal">
+  <section class="modal done" role="dialog" aria-modal="true">
+    <div class="done-icon">🙏</div>
+    <h2>기도가 더해졌습니다.</h2>
+    <p>당신의 기도 한 번이<br>이 집의 한 겹이 되었습니다.</p>
+    <button id="doneClose">확인</button>
+  </section>
+</div>
+
 <script>
-(function(){"use strict";
-var SERVER_URL="https://script.google.com/macros/s/AKfycbzHSe_D4unVt8db1ntXLVw_RA7Yly_nIq5GqEMkb1ENaKaFWXk6ETcnC-iDNOpNCuTo/exec";var SUPABASE={url:"",anonKey:""};var GOAL_HOURS=1000;var $=function(id){return document.getElementById(id)};var SVGNS="http://www.w3.org/2000/svg";var qs=new URLSearchParams(location.search);try{if(qs.get("server"))localStorage.setItem("hb.server",qs.get("server"));if(!SERVER_URL)SERVER_URL=localStorage.getItem("hb.server")||"";if(qs.get("sb"))localStorage.setItem("hb.sb",qs.get("sb"));if(!SUPABASE.url){var sb=(localStorage.getItem("hb.sb")||"").split(",");if(sb.length===2){SUPABASE.url=sb[0].trim();SUPABASE.anonKey=sb[1].trim()}}}catch(e){}var state={hours:0};
-function win(x,w,y,h,arch){var r=w/2;if(arch)return"M"+x+" "+(y+h)+" V"+(y+r)+" A"+r+" "+r+" 0 0 1 "+(x+w)+" "+(y+r)+" V"+(y+h)+" Z";return"M"+x+" "+(y+h)+" V"+y+" H"+(x+w)+" V"+(y+h)+" Z"}var COLS=[102,140,234,272],PARTS=[];function add(d,cls,a,b){PARTS.push({d:d,cls:cls||"",a:a,b:b})}add("M10 300 H390","thin",0,.035);add("M40 288 H360","thin",.035,.06);add("M90 300 V150 H310 V300 Z","wall bold",.06,.17);add("M40 300 V205 H90 V300 Z","wall bold",.17,.215);add("M360 300 V205 H310 V300 Z","wall bold",.17,.215);add("M34 205 H96","thin",.215,.235);add("M304 205 H366","thin",.215,.235);COLS.forEach(function(x,i){add(win(x,26,236,46,false),"win",.245+i*.026,.271+i*.026)});add(win(52,26,236,46,false),"win",.349,.372);add(win(322,26,236,46,false),"win",.349,.372);add("M164 296 H236 V300 H164 Z","step",.378,.396);add("M170 292 H230 V296 H170 Z","step",.396,.412);add("M176 288 H224 V292 H176 Z","step",.412,.428);add("M185 288 V247 A15 15 0 0 1 215 247 V288 Z","door",.428,.474);add("M176 247 L200 232 L224 247","",.474,.5);COLS.forEach(function(x,i){add(win(x,26,170,46,true),"win",.51+i*.026,.536+i*.026)});add(win(187,26,170,46,true),"win",.614,.642);add("M180 216 H220 V224 H180 Z","thin",.642,.66);add("M82 152 H318 V144 H82 Z","cornice",.66,.706);add("M82 144 L108 92 H292 L318 144 Z","roof bold",.706,.83);[140,200,260].forEach(function(c,i){add("M"+(c-12)+" 122 V106 L"+c+" 96 L"+(c+12)+" 106 V122 Z","dormer",.83+i*.03,.86+i*.03)});add("M120 94 V58 H134 V94 Z","chim",.92,.95);add("M266 94 V58 H280 V94 Z","chim",.92,.95);add("M116 58 H138","thin",.95,.962);add("M262 58 H284","thin",.95,.962);function mull(x,w,y,h){add("M"+(x+w/2)+" "+y+" V"+(y+h),"thin mull",.962,1);add("M"+x+" "+(y+h*.42)+" H"+(x+w),"thin mull",.962,1)}COLS.forEach(function(x){mull(x,26,236,46)});COLS.forEach(function(x){mull(x,26,176,40)});mull(187,26,176,40);mull(52,26,236,46);mull(322,26,236,46);add("M200 288 V240","thin mull",.962,1);[140,200,260].forEach(function(c){add("M"+(c-6)+" 120 V110 H"+(c+6)+" V120","thin",.962,1)});
-var DX=46,DY=-34;function face(a,b,t,k){var d=t*(k||1),ax=a[0]+DX*d,ay=a[1]+DY*d,bx=b[0]+DX*d,by=b[1]+DY*d;return"M"+a[0]+" "+a[1]+" L"+b[0]+" "+b[1]+" L"+bx+" "+by+" L"+ax+" "+ay+" Z"}var FACES=[{a:[40,300],b:[360,300],fill:"var(--r-ground)",id:"ground"},{a:[108,92],b:[292,92],fill:"var(--r-roof-top)"},{a:[292,92],b:[318,144],fill:"var(--r-roof-s)"},{a:[40,205],b:[90,205],fill:"var(--r-wall-s)"},{a:[310,205],b:[360,205],fill:"var(--r-wall-s)"},{a:[310,150],b:[310,300],fill:"var(--r-wall-s)"},{a:[360,205],b:[360,300],fill:"var(--r-wall-s)"},{a:[120,58],b:[134,58],fill:"var(--r-chim)",k:.3},{a:[134,58],b:[134,94],fill:"#6F543F",k:.3},{a:[266,58],b:[280,58],fill:"var(--r-chim)",k:.3},{a:[280,58],b:[280,94],fill:"#6F543F",k:.3}],nodes=[],solidNodes=[],groundNode=null;
-function buildScene(){var g=$("house");PARTS.forEach(function(p){var el=document.createElementNS(SVGNS,"path");el.setAttribute("d",p.d);el.setAttribute("pathLength","1");if(p.cls)el.setAttribute("class",p.cls);el.style.strokeDasharray="1";el.style.strokeDashoffset="1";g.appendChild(el);nodes.push({el:el,a:p.a,b:p.b})});FACES.forEach(function(f){var el=document.createElementNS(SVGNS,"path");el.setAttribute("fill",f.fill);el.setAttribute("d",face(f.a,f.b,0,f.k));(f.id==="ground"?$("ground"):$("solid")).appendChild(el);if(f.id==="ground")groundNode={el:el,f:f};else solidNodes.push({el:el,f:f})});var glow=$("glow");[[102,236],[140,236],[234,236],[272,236],[52,236],[322,236],[102,176],[140,176],[234,176],[272,176],[187,176]].forEach(function(w){var c=document.createElementNS(SVGNS,"circle");c.setAttribute("cx",w[0]+13);c.setAttribute("cy",w[1]+22);c.setAttribute("r",32);c.setAttribute("fill","url(#g-glow)");glow.appendChild(c)});var dims=$("dims");var axis=document.createElementNS(SVGNS,"path");axis.setAttribute("d","M200 70 V312");axis.setAttribute("stroke","var(--line)");axis.setAttribute("fill","none");axis.setAttribute("stroke-width",".5");axis.setAttribute("stroke-dasharray","9 3 1.5 3");axis.setAttribute("opacity",".45");dims.appendChild(axis);var dim=document.createElementNS(SVGNS,"path");dim.setAttribute("d","M2 92 V300 M-4 92 H8 M-4 300 H8 M8 92 H104 M8 300 H36");dim.setAttribute("stroke","var(--line)");dim.setAttribute("fill","none");dim.setAttribute("stroke-width",".5");dim.setAttribute("opacity",".55");dims.appendChild(dim);var grid=$("grid");for(var x=0;x<=400;x+=20)grid.appendChild(gridLine(x,0,x,320));for(var y=0;y<=320;y+=20)grid.appendChild(gridLine(0,y,400,y))}
-function gridLine(x1,y1,x2,y2){var l=document.createElementNS(SVGNS,"line");l.setAttribute("x1",x1);l.setAttribute("y1",y1);l.setAttribute("x2",x2);l.setAttribute("y2",y2);return l}function clamp(v){return v<0?0:v>1?1:v}function lerpHex(c1,c2,t){var a=[parseInt(c1.substr(1,2),16),parseInt(c1.substr(3,2),16),parseInt(c1.substr(5,2),16)],b=[parseInt(c2.substr(1,2),16),parseInt(c2.substr(3,2),16),parseInt(c2.substr(5,2),16)];return"rgb("+a.map(function(v,i){return Math.round(v+(b[i]-v)*t)}).join(",")+")"}var raised=0,rising=false;function setDepth(t){raised=t;solidNodes.forEach(function(n){n.el.setAttribute("d",face(n.f.a,n.f.b,t,n.f.k));n.el.style.opacity=t>0?"1":"0"});if(groundNode)groundNode.el.setAttribute("d",face(groundNode.f.a,groundNode.f.b,t,groundNode.f.k))}function rise(){if(rising)return;rising=true;var t0=0;function step(ts){if(!t0)t0=ts;var k=clamp((ts-t0)/1900);setDepth(1-Math.pow(1-k,3));if(k<1)requestAnimationFrame(step)}requestAnimationFrame(step)}
-function render(){var p=GOAL_HOURS>0?clamp(state.hours/GOAL_HOURS):0,done=p>=1,drawP=p<.03?p*.55:p;nodes.forEach(function(n){var local=n.b>n.a?clamp((drawP-n.a)/(n.b-n.a)):(drawP>=n.b?1:0);n.el.style.strokeDashoffset=String(1-local);n.el.style.opacity=local>0?"1":"0"});var caption=$("stage-caption");if(caption){if(done)caption.textContent="기도가 집이 되었습니다.";else if(p<=0)caption.textContent="첫 기도를 기다리고 있습니다.";else if(p<.2)caption.textContent="첫 선이 집의 시작이 됩니다.";else if(p<.5)caption.textContent="기도가 한 겹씩 집을 세우고 있습니다.";else if(p<.8)caption.textContent="우리의 기도가 집의 모양을 만들어 갑니다.";else caption.textContent="마지막 선까지 함께 채워 주세요."}document.body.style.backgroundColor=done?"#C9D5E6":lerpHex("#060910","#7D91B3",Math.pow(p,.75));document.body.classList.toggle("bright",done);$("grid").style.opacity=done?"0":String((.05+p*.09).toFixed(3));$("sheet").style.opacity=done?"0":String((.1+p*.52).toFixed(3));$("dims").style.opacity=done?"0":String(clamp((p-.9)/.08).toFixed(3));$("blueprint").classList.toggle("real",done);if(done)rise();else if(raised)setDepth(0)}
-var Store={mode:"none"};function alertForm(msg,bad){var n=$("form-alert");n.classList.toggle("bad",!!bad);if(!msg){n.hidden=true;n.textContent="";return}n.hidden=false;n.textContent=msg}function short(e){var m=e&&e.message?String(e.message):"";return m.length>110?m.slice(0,110)+"…":m}function sumHours(rows){return rows.reduce(function(a,r){return a+(Number(r.hours)||0)},0)}function setHours(h){state.hours=h;render()}
-function restRead(r){return r.text().then(function(t){var s=(t||"").trim();if(s.charAt(0)==="{"||s.charAt(0)==="["){try{return JSON.parse(s)}catch(e){throw new Error("응답을 해석하지 못했습니다 (HTTP "+r.status+")")}}if(/accounts\.google\.com|ServiceLogin/i.test(s))throw new Error("Apps Script 배포 권한이 '모든 사용자'가 아닙니다.");throw new Error("서버가 JSON 을 돌려주지 않았습니다 (HTTP "+r.status+")")})}function restPoll(){fetch(SERVER_URL+(SERVER_URL.indexOf("?")<0?"?":"&")+"action=total&t="+Date.now(),{redirect:"follow"}).then(restRead).then(function(j){if(j&&j.ok)setHours(Number(j.hours)||0)}).catch(function(){})}function sbHead(extra){var h={apikey:SUPABASE.anonKey,Authorization:"Bearer "+SUPABASE.anonKey};if(extra)Object.keys(extra).forEach(function(k){h[k]=extra[k]});return h}function sbRest(path){return SUPABASE.url.replace(/\/+$/,"")+"/rest/v1/"+path}function sbPoll(){fetch(sbRest("prayer_hours?select=hours&limit=5000"),{headers:sbHead()}).then(function(r){return r.json()}).then(function(j){if(Array.isArray(j))setHours(sumHours(j))}).catch(function(){})}var LOCAL_KEY="hb.prayers";function localRead(){try{return JSON.parse(localStorage.getItem(LOCAL_KEY)||"[]")}catch(e){return[]}}
-Store.add=function(rec){if(Store.mode==="rest")return fetch(SERVER_URL,{method:"POST",redirect:"follow",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"add",topic:rec.topic,heart:rec.heart,hours:rec.hours,name:rec.name})}).then(restRead).then(function(j){if(!j||j.ok!==true)throw new Error(j&&j.error?j.error:"저장에 실패했습니다.");restPoll()});if(Store.mode==="supabase")return fetch(sbRest("prayers"),{method:"POST",headers:sbHead({"Content-Type":"application/json",Prefer:"return=minimal"}),body:JSON.stringify([{topic:rec.topic,heart:rec.heart,hours:rec.hours,name:rec.name,ts:Date.now()}])}).then(function(r){if(!r.ok)return r.json().then(function(j){throw new Error(j&&j.message||"저장 실패")});sbPoll()});var list=localRead();list.push({topic:rec.topic,heart:rec.heart,hours:rec.hours,name:rec.name,ts:Date.now()});try{localStorage.setItem(LOCAL_KEY,JSON.stringify(list))}catch(e){}setHours(sumHours(list));return Promise.resolve()};
-function startStore(){if(SERVER_URL){Store.mode="rest";restPoll();setInterval(restPoll,6000);window.addEventListener("focus",restPoll);return}if(SUPABASE.url&&SUPABASE.anonKey){Store.mode="supabase";sbPoll();setInterval(sbPoll,6000);window.addEventListener("focus",sbPoll);return}var c=window.claude;if(c&&typeof c.use==="function"){c.use("db").then(function(db){if(!db)return goLocal();Store.mode="db";Store.db=db;db.collection("prayers").limit(1000).onSnapshot(function(snap){setHours(sumHours(snap.docs.map(function(d){return d.data()||{}})))},function(){})},goLocal);return}goLocal()}function goLocal(){Store.mode="local";setHours(sumHours(localRead()))}
-var HOURS=[{h:.5,l:"30분"},{h:1,l:"1시간"},{h:1.5,l:"1시간 30분"},{h:2,l:"2시간"},{h:2.5,l:"2시간 30분"},{h:3,l:"3시간"},{h:4,l:"4시간"},{h:5,l:"5시간"},{h:6,l:"6시간"},{h:8,l:"8시간"},{h:10,l:"10시간"},{h:12,l:"12시간"},{h:15,l:"15시간"},{h:20,l:"20시간"},{h:24,l:"24시간"}],ITEM=44,pIndex=1,pTimer=null;
-function buildPicker(){var sc=$("pscroll"),top=document.createElement("div");top.className="pad";sc.appendChild(top);HOURS.forEach(function(o,i){var d=document.createElement("div");d.className="pitem";d.textContent=o.l;d.setAttribute("role","option");d.addEventListener("click",function(){pickTo(i)});sc.appendChild(d)});var bot=document.createElement("div");bot.className="pad";sc.appendChild(bot);sc.addEventListener("scroll",function(){var i=Math.round(sc.scrollTop/ITEM);i=Math.max(0,Math.min(HOURS.length-1,i));if(i!==pIndex){pIndex=i;paintPicker()}if(pTimer)clearTimeout(pTimer);pTimer=setTimeout(paintPicker,120)},{passive:true});sc.addEventListener("keydown",function(e){if(e.key==="ArrowDown"){e.preventDefault();pickTo(Math.min(pIndex+1,HOURS.length-1))}if(e.key==="ArrowUp"){e.preventDefault();pickTo(Math.max(pIndex-1,0))}})}function paintPicker(){var items=$("pscroll").querySelectorAll(".pitem");for(var k=0;k<items.length;k++){items[k].classList.toggle("on",k===pIndex);items[k].setAttribute("aria-selected",String(k===pIndex))}}function pickTo(i,instant){pIndex=i;paintPicker();var sc=$("pscroll");if(instant)sc.scrollTop=i*ITEM;else sc.scrollTo({top:i*ITEM,behavior:"smooth"})}
-function show(which){["house","form","done"].forEach(function(v){$("view-"+v).hidden=v!==which});window.scrollTo(0,0);if(which==="form")pickTo(pIndex,true)}$("pray-open").addEventListener("click",function(){alertForm("");show("form")});$("form-back").addEventListener("click",function(){show("house")});$("done-home").addEventListener("click",function(){show("house")});$("done-again").addEventListener("click",function(){$("f-topic").value="";$("f-heart").value="";alertForm("");show("form");$("f-topic").focus()});
-$("f-submit").addEventListener("click",function(){var topic=$("f-topic").value.trim();if(!topic){alertForm("기도제목을 적어주세요.",true);$("f-topic").focus();return}var btn=$("f-submit");btn.disabled=true;btn.textContent="올리는 중…";alertForm("");Store.add({topic:topic,heart:$("f-heart").value.trim(),hours:HOURS[pIndex].h,name:$("f-name").value.trim()}).then(function(){show("done")}).catch(function(e){alertForm(short(e)||"저장에 실패했습니다.",true)}).then(function(){btn.disabled=false;btn.textContent="기도 올려드리기"})});
-buildScene();buildPicker();render();startStore();
+(function(){
+"use strict";
+var SERVER_URL="https://script.google.com/macros/s/AKfycbzHSe_D4unVt8db1ntXLVw_RA7Yly_nIq5GqEMkb1ENaKaFWXk6ETcnC-iDNOpNCuTo/exec";
+var GOAL_MINUTES=60000;
+var state={minutes:0,count:0};
+var $=function(id){return document.getElementById(id)};
+var app=$("app"),wrap=$("houseWrap"),logo=$("logo");
+var scroll=$("minuteScroll"),selected=30,timer=null;
+var items=[];
+var localKey="welcome.home.prayers.v3";
+
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function setStats(minutes,count){
+  state.minutes=Math.max(0,Number(minutes)||0);state.count=Math.max(0,Number(count)||0);
+  var p=clamp(state.minutes/GOAL_MINUTES,0,1);
+  $("totalMinutes").textContent=Math.round(state.minutes).toLocaleString("ko-KR");
+  $("prayerCount").textContent=Math.round(state.count).toLocaleString("ko-KR");
+  $("progressBar").style.width=(p*100)+"%";
+  app.dataset.p=p>=1?"1":"0";
+  wrap.classList.toggle("final",p>=1);
+  var blue=.04+.72*Math.pow(p,.72);
+  document.querySelector(".blueprint").style.opacity=p>=1?0:blue;
+  document.querySelector(".blueprint").style.transform="scale("+(0.92+.08*p)+")";
+  if(p<=0){$("stageTitle").textContent="첫 기도를 기다리고 있습니다.";$("stageSub").textContent="PRAY · BUILD · WELCOME"}
+  else if(p<.15){$("stageTitle").textContent="첫 선이 그려지고 있습니다.";$("stageSub").textContent="THE BLUEPRINT BEGINS"}
+  else if(p<.4){$("stageTitle").textContent="기도가 집의 모양을 만들고 있습니다.";$("stageSub").textContent="PRAYER BECOMES A HOME"}
+  else if(p<.75){$("stageTitle").textContent="우리의 기도가 집을 채워갑니다.";$("stageSub").textContent="ONE PRAYER AT A TIME"}
+  else if(p<1){$("stageTitle").textContent="마지막까지 함께 채워주세요.";$("stageSub").textContent="ALMOST HOME"}
+  else{$("stageTitle").textContent="기도가 집이 되었습니다.";$("stageSub").textContent="WELCOME HOME"}
+}
+
+function loadStats(){
+  if(!SERVER_URL){loadLocal();return}
+  fetch(SERVER_URL+"?t="+Date.now(),{redirect:"follow"})
+    .then(function(r){return r.json()})
+    .then(function(j){if(j&&j.ok)setStats(j.minutes,j.count);else loadLocal()})
+    .catch(loadLocal);
+}
+function loadLocal(){
+  try{
+    var list=JSON.parse(localStorage.getItem(localKey)||"[]"),m=0;
+    list.forEach(function(x){m+=Number(x.minutes)||0});
+    setStats(m,list.length);
+  }catch(e){setStats(0,0)}
+}
+function saveLocal(rec){
+  try{
+    var list=JSON.parse(localStorage.getItem(localKey)||"[]");list.push(rec);
+    localStorage.setItem(localKey,JSON.stringify(list));loadLocal();
+  }catch(e){}
+}
+function postPrayer(rec){
+  if(!SERVER_URL){saveLocal(rec);return Promise.resolve()}
+  return fetch(SERVER_URL,{
+    method:"POST",redirect:"follow",
+    headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:JSON.stringify({action:"add",name:rec.name,minutes:rec.minutes,topic:rec.topic})
+  }).then(function(r){return r.text()}).then(function(t){
+    var j;try{j=JSON.parse(t)}catch(e){throw new Error("서버 응답을 읽을 수 없습니다.")}
+    if(!j.ok)throw new Error(j.error||"저장에 실패했습니다.");
+    setStats(j.minutes,j.count);
+  });
+}
+
+function buildPicker(){
+  var top=document.createElement("div");top.className="pad";scroll.appendChild(top);
+  for(var i=1;i<=180;i++){
+    var d=document.createElement("div");d.className="minute";d.textContent=i+"분";d.dataset.value=i;d.setAttribute("role","option");
+    d.addEventListener("click",function(){pick(Number(this.dataset.value))});
+    scroll.appendChild(d);items.push(d);
+  }
+  var bot=document.createElement("div");bot.className="pad";scroll.appendChild(bot);
+  scroll.addEventListener("scroll",function(){
+    var i=clamp(Math.round(scroll.scrollTop/44)+1,1,180);
+    if(i!==selected){selected=i;paint()}
+    clearTimeout(timer);timer=setTimeout(paint,80);
+  },{passive:true});
+  scroll.addEventListener("keydown",function(e){
+    if(e.key==="ArrowDown"){e.preventDefault();pick(clamp(selected+1,1,180))}
+    if(e.key==="ArrowUp"){e.preventDefault();pick(clamp(selected-1,1,180))}
+  });
+}
+function paint(){items.forEach(function(x){var on=Number(x.dataset.value)===selected;x.classList.toggle("on",on);x.setAttribute("aria-selected",on)})}
+function pick(n){selected=clamp(n,1,180);paint();scroll.scrollTo({top:(selected-1)*44,behavior:"smooth"})}
+function resetForm(){ $("name").value="";$("topic").value="";$("alert").textContent="";selected=30;scroll.scrollTop=(selected-1)*44;paint() }
+function openModal(){resetForm();$("prayerModal").classList.add("open");setTimeout(function(){$("name").focus()},180)}
+function closeModal(){$("prayerModal").classList.remove("open")}
+$("openPrayer").addEventListener("click",openModal);
+$("closeModal").addEventListener("click",closeModal);
+$("prayerModal").addEventListener("click",function(e){if(e.target===this)closeModal()});
+$("doneClose").addEventListener("click",function(){$("doneModal").classList.remove("open")});
+
+$("submit").addEventListener("click",function(){
+  var name=$("name").value.trim(),topic=$("topic").value.trim(),btn=$("submit");
+  $("alert").textContent="";
+  if(!name){$("alert").textContent="이름을 입력해주세요.";return}
+  btn.disabled=true;btn.textContent="올리는 중…";
+  postPrayer({name:name,minutes:selected,topic:topic})
+    .then(function(){closeModal();$("doneModal").classList.add("open")})
+    .catch(function(e){$("alert").textContent=e.message||"저장에 실패했습니다."})
+    .then(function(){btn.disabled=false;btn.textContent="기도 올리기"});
+});
+
+buildPicker();pick(30);
+setTimeout(function(){logo.classList.add("ready")},180);
+loadStats();
+setInterval(loadStats,10000);
+window.addEventListener("focus",loadStats);
 })();
 </script>
+</body>
+</html>
