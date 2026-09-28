@@ -163,7 +163,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 (function(){
 "use strict";
 var SERVER_URL="https://script.google.com/macros/s/AKfycbwpCNRWgHknWBzv9cLjf4IMqwGsvgll3mDFb6WAfN79YAbkT9a_IPFFWa8eXyUICJ00/exec";
-var GOAL_MINUTES=60000;
+var GOAL_COUNT=300;
 var state={minutes:0,count:0};
 var $=function(id){return document.getElementById(id)};
 var app=$("app"),wrap=$("houseWrap"),logo=$("logo");
@@ -174,7 +174,7 @@ var localKey="welcome.home.prayers.v3";
 function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function setStats(minutes,count){
   state.minutes=Math.max(0,Number(minutes)||0);state.count=Math.max(0,Number(count)||0);
-  var p=clamp(state.minutes/GOAL_MINUTES,0,1);
+  var p=clamp(state.count/GOAL_COUNT,0,1);
   $("totalMinutes").textContent=Math.round(state.minutes).toLocaleString("ko-KR");
   $("prayerCount").textContent=Math.round(state.count).toLocaleString("ko-KR");
   $("progressBar").style.width=(p*100)+"%";
