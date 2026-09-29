@@ -178,7 +178,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 (function(){
 "use strict";
 var SERVER_URL="https://script.google.com/macros/s/AKfycbwpCNRWgHknWBzv9cLjf4IMqwGsvgll3mDFb6WAfN79YAbkT9a_IPFFWa8eXyUICJ00/exec";
-var GOAL_COUNT=300;
+var GOAL_COUNT=200;
 var state={minutes:0,count:0};
 var $=function(id){return document.getElementById(id)};
 var app=$("app"),wrap=$("houseWrap"),logo=$("logo");
@@ -255,7 +255,7 @@ function setStats(minutes,count){
   var blue=.04+.72*Math.pow(p,.72);
   var bp=document.querySelector(".blueprint");
   var imageNodes=document.querySelectorAll(".stage-image");
-  var imageStage=percent>=11;
+  var imageStage=percent>=10;
   wrap.classList.toggle("image-stage",imageStage);
   bp.style.opacity=imageStage?0:blue;
   bp.style.transform="scale("+(0.92+.08*p)+")";
