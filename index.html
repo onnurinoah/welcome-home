@@ -28,12 +28,18 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 .logo.ready{opacity:1;transform:none}
 .logo img{display:block;width:100%;height:auto;object-fit:contain}
 .stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
-.house-wrap{width:min(100%,440px);aspect-ratio:1/1;position:relative;display:grid;place-items:center}
-.blueprint,.realhouse{position:absolute;inset:0;width:100%;height:100%}
+.house-wrap{width:min(100%,440px);aspect-ratio:9/16;position:relative;display:grid;place-items:center}
+.blueprint,.realhouse,.stage-image{position:absolute;inset:0;width:100%;height:100%}
 .blueprint{opacity:.04;transform:scale(.92);transition:opacity 1.7s,transform 2s}
+.stage-image{object-fit:cover;opacity:0;transform:scale(1);transition:opacity 1.8s ease,transform 2.4s ease;pointer-events:none}
+.stage-image.active{opacity:1}
 .realhouse{opacity:0;transform:scale(.91) translateY(8px);transition:opacity 2.4s,transform 2.4s}
 .house-wrap.final .blueprint{opacity:0}
-.house-wrap.final .realhouse{opacity:1;transform:scale(1) translateY(0)}
+.house-wrap.final .realhouse{opacity:0}
+.house-wrap.final .stage-image.final-image{opacity:1;transform:scale(1)}
+.house-wrap.final .stage-image:not(.final-image){opacity:0}
+.house-wrap.image-stage .blueprint{opacity:0}
+.house-wrap.image-stage .realhouse{opacity:0}
 .bp-grid{stroke:rgba(176,205,226,.18);stroke-width:.5}
 .bp-line{fill:none;stroke:var(--line);stroke-width:1.1;vector-effect:non-scaling-stroke}
 .bp-fine{fill:none;stroke:rgba(171,202,224,.62);stroke-width:.65;vector-effect:non-scaling-stroke}
@@ -92,6 +98,14 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
         </g>
       </g>
     </svg>
+
+    <img class="stage-image" data-stage="11" src="assets/11.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="25" src="assets/25.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="40" src="assets/40.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="55" src="assets/55.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="70" src="assets/70.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="85" src="assets/85.png" alt="" aria-hidden="true">
+    <img class="stage-image final-image" data-stage="100" src="assets/100.png" alt="" aria-hidden="true">
 
     <svg class="realhouse" viewBox="0 0 400 400" aria-hidden="true">
       <defs>
@@ -237,9 +251,22 @@ function setStats(minutes,count){
   $("progressBar").style.width=(p*100)+"%";
   app.dataset.p=p>=1?"1":"0";
   wrap.classList.toggle("final",p>=1);
+  var percent=p*100;
   var blue=.04+.72*Math.pow(p,.72);
-  document.querySelector(".blueprint").style.opacity=p>=1?0:blue;
-  document.querySelector(".blueprint").style.transform="scale("+(0.92+.08*p)+")";
+  var bp=document.querySelector(".blueprint");
+  var imageNodes=document.querySelectorAll(".stage-image");
+  var imageStage=percent>=11;
+  wrap.classList.toggle("image-stage",imageStage);
+  bp.style.opacity=imageStage?0:blue;
+  bp.style.transform="scale("+(0.92+.08*p)+")";
+  imageNodes.forEach(function(img){
+    var stage=Number(img.dataset.stage);
+    img.classList.toggle("active",imageStage && percent>=stage && percent<100);
+    if(stage===100) img.classList.toggle("final-image",percent>=100);
+  });
+  if(percent>=100){
+    imageNodes.forEach(function(img){img.classList.toggle("active",Number(img.dataset.stage)===100)});
+  }
   if(p<=0){$("stageTitle").textContent="첫 기도를 기다리고 있습니다.";$("stageSub").textContent="PRAY · BUILD · WELCOME"}
   else if(p<.15){$("stageTitle").textContent="첫 선이 그려지고 있습니다.";$("stageSub").textContent="THE BLUEPRINT BEGINS"}
   else if(p<.4){$("stageTitle").textContent="기도가 집의 모양을 만들고 있습니다.";$("stageSub").textContent="PRAYER BECOMES A HOME"}
