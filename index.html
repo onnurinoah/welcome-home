@@ -268,11 +268,11 @@ function setStats(minutes,count){
   if(prayerCount>=80){
     imageNodes.forEach(function(img){img.classList.toggle("active",Number(img.dataset.stage)===80)});
   }
-  if(p<=0){$("stageTitle").textContent="첫 기도를 기다리고 있습니다.";$("stageSub").textContent="PRAY · BUILD · WELCOME"}
-  else if(p<.15){$("stageTitle").textContent="첫 선이 그려지고 있습니다.";$("stageSub").textContent="THE BLUEPRINT BEGINS"}
-  else if(p<.4){$("stageTitle").textContent="기도가 집의 모양을 만들고 있습니다.";$("stageSub").textContent="PRAYER BECOMES A HOME"}
-  else if(p<.75){$("stageTitle").textContent="우리의 기도가 집을 채워갑니다.";$("stageSub").textContent="ONE PRAYER AT A TIME"}
-  else if(p<1){$("stageTitle").textContent="마지막까지 함께 채워주세요.";$("stageSub").textContent="ALMOST HOME"}
+  if(prayerCount<=0){$("stageTitle").textContent="첫 기도를 기다리고 있습니다.";$("stageSub").textContent="PRAY · BUILD · WELCOME"}
+  else if(prayerCount<20){$("stageTitle").textContent="첫 선이 그려지고 있습니다.";$("stageSub").textContent="THE BLUEPRINT BEGINS"}
+  else if(prayerCount<40){$("stageTitle").textContent="기도가 쌓이며 집의 모습이 드러나고 있습니다.";$("stageSub").textContent="PRAYER BUILDS A HOME"}
+  else if(prayerCount<60){$("stageTitle").textContent="우리의 기도가 집을 조금씩 채워갑니다.";$("stageSub").textContent="ONE PRAYER AT A TIME"}
+  else if(prayerCount<80){$("stageTitle").textContent="기도가 집을 완성해가고 있습니다.";$("stageSub").textContent="ALMOST HOME"}
   else{$("stageTitle").textContent="기도가 집이 되었습니다.";$("stageSub").textContent="WELCOME HOME"}
 }
 
