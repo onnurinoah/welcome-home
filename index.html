@@ -99,13 +99,13 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
       </g>
     </svg>
 
-    <img class="stage-image" data-stage="10" src="assets/11.png" alt="" aria-hidden="true">
-    <img class="stage-image" data-stage="25" src="assets/25.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="20" src="assets/11.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="30" src="assets/25.png" alt="" aria-hidden="true">
     <img class="stage-image" data-stage="40" src="assets/40.png" alt="" aria-hidden="true">
-    <img class="stage-image" data-stage="55" src="assets/55.png" alt="" aria-hidden="true">
-    <img class="stage-image" data-stage="70" src="assets/70.png" alt="" aria-hidden="true">
-    <img class="stage-image" data-stage="85" src="assets/85.png" alt="" aria-hidden="true">
-    <img class="stage-image final-image" data-stage="100" src="assets/100.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="50" src="assets/55.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="60" src="assets/70.png" alt="" aria-hidden="true">
+    <img class="stage-image" data-stage="70" src="assets/85.png" alt="" aria-hidden="true">
+    <img class="stage-image final-image" data-stage="80" src="assets/100.png" alt="" aria-hidden="true">
 
     <svg class="realhouse" viewBox="0 0 400 400" aria-hidden="true">
       <defs>
@@ -261,11 +261,11 @@ function setStats(minutes,count){
   bp.style.transform="scale("+(0.92+.08*p)+")";
   imageNodes.forEach(function(img){
     var stage=Number(img.dataset.stage);
-    img.classList.toggle("active",imageStage && percent>=stage && percent<100);
-    if(stage===100) img.classList.toggle("final-image",percent>=100);
+    img.classList.toggle("active",imageStage && prayerCount>=stage && prayerCount<80);
+    if(stage===80) img.classList.toggle("final-image",prayerCount>=80);
   });
-  if(percent>=100){
-    imageNodes.forEach(function(img){img.classList.toggle("active",Number(img.dataset.stage)===100)});
+  if(prayerCount>=80){
+    imageNodes.forEach(function(img){img.classList.toggle("active",Number(img.dataset.stage)===80)});
   }
   if(p<=0){$("stageTitle").textContent="첫 기도를 기다리고 있습니다.";$("stageSub").textContent="PRAY · BUILD · WELCOME"}
   else if(p<.15){$("stageTitle").textContent="첫 선이 그려지고 있습니다.";$("stageSub").textContent="THE BLUEPRINT BEGINS"}
