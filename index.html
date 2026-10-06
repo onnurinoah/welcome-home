@@ -22,13 +22,13 @@ button{cursor:pointer}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.2;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 5px)}
 .app{min-height:100svh;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 45%,rgba(36,76,108,.2),transparent 48%),var(--bg);transition:background 1.8s ease}
 .app[data-p="1"]{background:radial-gradient(circle at 50% 46%,rgba(97,137,168,.36),transparent 54%),#5d7e9b}
-.shell{width:min(100%,520px);min-height:100svh;margin:auto;padding:22px 20px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;position:relative;z-index:2}
+.shell{width:min(100%,520px);min-height:100svh;margin:auto;padding:10px 20px max(18px,env(safe-area-inset-bottom));display:flex;flex-direction:column;position:relative;z-index:2}
 .top{display:flex;justify-content:center;align-items:center;padding-top:4px}
-.logo{width:min(72vw,300px);display:flex;justify-content:center;align-items:center;opacity:.15;transform:translateY(4px) scale(.97);transition:opacity 1.8s,transform 1.8s}
+.logo{width:min(66vw,250px);display:flex;justify-content:center;align-items:center;opacity:.15;transform:translateY(4px) scale(.97);transition:opacity 1.8s,transform 1.8s}
 .logo.ready{opacity:1;transform:none}
 .logo img{display:block;width:100%;height:auto;object-fit:contain}
-.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
-.house-wrap{width:min(100%,440px);aspect-ratio:9/16;position:relative;display:grid;place-items:center}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;padding:2px 0}
+.house-wrap{width:min(100%,350px);aspect-ratio:9/14;position:relative;display:grid;place-items:center}
 .blueprint,.realhouse,.stage-image{position:absolute;inset:0;width:100%;height:100%}
 .blueprint{opacity:.04;transform:scale(.92);transition:opacity 1.7s,transform 2s}
 .stage-image{object-fit:cover;opacity:0;transform:scale(1);transition:opacity 1.8s ease,transform 2.4s ease;pointer-events:none}
@@ -51,12 +51,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opa
 .stage-copy{position:absolute;bottom:3%;left:0;right:0;text-align:center;pointer-events:none}
 .stage-copy strong{display:block;font-size:13px;letter-spacing:.06em;font-weight:300;opacity:.9}
 .stage-copy span{display:block;margin-top:4px;font-family:var(--sans);font-size:9px;letter-spacing:.18em;color:var(--muted)}
-.stats{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;width:100%;margin:0 0 17px}
+.stats{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;width:100%;margin:0 0 11px}
 .stat{text-align:center}.stat .label{font-size:10px;color:var(--muted);letter-spacing:.12em}.stat .value{margin-top:3px;font-family:var(--sans);font-size:30px;font-weight:300;color:var(--gold);line-height:1}.stat .unit{font-size:12px;margin-left:3px;color:var(--gold)}.divider{width:1px;height:34px;background:rgba(255,255,255,.18)}
-.pray{width:100%;height:60px;border:1px solid rgba(247,226,160,.7);background:rgba(247,226,160,.96);color:#172331;font-size:16px;letter-spacing:.06em;border-radius:2px;box-shadow:0 12px 34px rgba(0,0,0,.2);transition:transform .15s}
+.pray{width:100%;height:56px;border:1px solid rgba(247,226,160,.7);background:rgba(247,226,160,.96);color:#172331;font-size:16px;letter-spacing:.06em;border-radius:2px;box-shadow:0 12px 34px rgba(0,0,0,.2);transition:transform .15s}
 .pray:active{transform:scale(.985)}
 .pray .hands{font-size:22px;vertical-align:-2px;margin-right:8px}
-.progress{height:2px;background:rgba(255,255,255,.1);margin:14px 0 0;overflow:hidden}
+.progress{height:2px;background:rgba(255,255,255,.1);margin:10px 0 0;overflow:hidden}
 .progress i{display:block;height:100%;width:0;background:var(--gold);transition:width 1.4s ease}
 .modal-back{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(12px);z-index:50;display:none;align-items:flex-end;justify-content:center}
 .modal-back.open{display:flex}
