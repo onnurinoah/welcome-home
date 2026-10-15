@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#061326"><meta name="description" content="사랑하는 사람의 이름을 담아 청사진을 함께 완성합니다.">
+<title>WELCOME HOME — 청사진</title>
+<style>
+:root{color-scheme:dark;--navy:#061326;--blue:#5bbcff;--line:#8fd4ff;--gold:#ffe0a0}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--navy);color:#f4f8ff;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif}
+body{background:radial-gradient(ellipse at 50% 45%,#10345b 0%,#07172d 48%,#030914 100%);overflow-x:hidden}
+main{width:min(100%,760px);min-height:100svh;margin:auto;padding:24px 18px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center}
+.brand{font-size:11px;letter-spacing:.32em;color:#8bb7dc;margin:4px 0 10px}.headline{font-size:clamp(24px,6vw,38px);font-weight:300;letter-spacing:.04em;text-align:center;margin:0}.sub{font-size:12px;color:#9db9d5;text-align:center;margin:10px 0 12px}
+.scene{width:min(100%,550px);height:clamp(300px,55vh,460px);position:relative;display:grid;place-items:center;perspective:900px}
+.glow{position:absolute;width:70%;height:55%;top:30%;background:radial-gradient(ellipse,#a8e4ff55 0%,#5ab9ff18 38%,transparent 72%);opacity:.15;transition:opacity 1.4s;filter:blur(10px)}
+.box-art{width:min(82%,390px);height:auto;overflow:visible;filter:drop-shadow(0 20px 28px #0008);position:relative;z-index:1}
+.box-base{fill:#071a31;stroke:#234c70;stroke-width:1.5}.seam{fill:none;stroke:#8acfff;stroke-width:1.1;opacity:.5}.hole{fill:#020813;stroke:#75c9ff;stroke-width:1}.leak{fill:none;stroke:#fff0bf;stroke-width:2;filter:drop-shadow(0 0 7px #8bd5ff);opacity:.72}
+.lid{transform-box:fill-box;transform-origin:bottom center;transition:transform 2s cubic-bezier(.2,.7,.15,1),opacity 1.2s}.side-lid{transform-box:fill-box;transform-origin:top center;transition:transform 2s cubic-bezier(.2,.7,.15,1)}
+.blueprint{position:absolute;inset:4% 0 0;width:100%;height:92%;opacity:0;transform:scale(.88);transition:opacity 2s ease 1s,transform 2.2s ease 1s;z-index:2;pointer-events:none}
+.open .lid-left{transform:rotate(-70deg) translate(-14px,-28px)}.open .lid-right{transform:rotate(70deg) translate(14px,-28px)}.open .lid-back{transform:rotateX(72deg) translateY(-18px)}.open .lid-front{transform:rotateX(-65deg) translateY(12px)}
+.open .box-base{opacity:.15;transition:opacity 1.5s}.open .leak{opacity:1;stroke-width:3}.open .blueprint{opacity:1;transform:scale(1)}.open .glow{opacity:1}
+.countdown{position:absolute;bottom:7px;font-variant-numeric:tabular-nums;font-size:13px;letter-spacing:.2em;color:#a7d9ff;z-index:4}
+.status{font-size:12px;min-height:20px;color:#9fc8e9;text-align:center;margin:0 0 12px}
+.panel{width:min(100%,480px);border:1px solid #6ba7d344;background:#07172dc9;padding:16px;border-radius:16px;box-shadow:0 18px 50px #0002}
+form{display:flex;gap:8px}input{min-width:0;flex:1;background:#0b2541;border:1px solid #42729a;border-radius:10px;padding:14px;color:#fff;font-size:16px;outline:none}input:focus{border-color:#8ed6ff}button{border:0;border-radius:10px;background:linear-gradient(135deg,#a8dfff,#55aaf0);color:#04172b;font-weight:600;padding:0 17px;font-size:14px;white-space:nowrap}button:disabled{opacity:.45}
+.meta{display:flex;justify-content:space-between;gap:12px;margin:12px 2px 0;font-size:11px;color:#8daecc}.names{width:min(100%,480px);margin-top:18px}.names-head{display:flex;justify-content:space-between;align-items:center;color:#b6d7f2;font-size:12px;margin-bottom:10px}.name-list{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}.name-chip{font-size:12px;color:#d9eeff;border:1px solid #73bfff4a;background:#0d2a48a6;padding:7px 10px;border-radius:20px;animation:appear .35s ease both}
+.open .name-chip{border-color:#8bd3ff9c;box-shadow:0 0 12px #50b7ff20}
+.privacy{font-size:10px;line-height:1.7;color:#6787a7;text-align:center;margin:20px auto 0;max-width:450px}
+@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body><main>
+<div class="brand">CH PLUS · WELCOME HOME</div>
+<h1 class="headline">당신을 위한 청사진</h1>
+<p class="sub">사랑하는 사람의 이름을 남겨주세요.</p>
+<section class="scene" id="scene" aria-label="이름이 모이면 열리는 청사진">
+<div class="glow"></div>
+<svg class="box-art" viewBox="0 0 400 330" role="img" aria-label="빛이 새어 나오는 상자">
+<defs><linearGradient id="front" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#153b5d"/><stop offset="1" stop-color="#07172b"/></linearGradient><linearGradient id="top" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#234b6c"/><stop offset="1" stop-color="#0a2038"/></linearGradient></defs>
+<g class="box-base"><path fill="url(#front)" d="M65 126 200 65 337 126 200 190Z"/><path d="M65 126 200 190V294L65 226Z" fill="#0b2540"/><path d="M200 190 337 126V226L200 294Z" fill="#07182d"/><path class="seam" d="M65 126 200 190 337 126M200 190V294M65 226 200 294 337 226"/><circle class="hole" cx="106" cy="163" r="5"/><circle class="hole" cx="130" cy="176" r="3"/><circle class="hole" cx="174" cy="206" r="4"/><circle class="hole" cx="236" cy="211" r="4"/><circle class="hole" cx="291" cy="171" r="5"/><circle class="hole" cx="260" cy="239" r="3"/><path class="leak" d="M192 174 205 180 202 207 213 222 207 251M112 151 119 158 116 171M286 157 279 169 285 181"/></g>
+<g class="lid lid-back"><path d="M65 126 200 65 337 126 200 190Z" fill="url(#top)" stroke="#72bfff" stroke-width="1.2"/></g>
+<g class="lid lid-left"><path d="M65 126 200 190 142 86 28 56Z" fill="#102d49" stroke="#74bfff" stroke-width="1.2"/><path class="seam" d="M65 126 142 86"/></g>
+<g class="lid lid-right"><path d="M337 126 200 190 258 86 374 56Z" fill="#0b2340" stroke="#74bfff" stroke-width="1.2"/><path class="seam" d="M337 126 258 86"/></g>
+<g class="lid lid-front"><path d="M65 126 200 190 200 225 65 159Z" fill="#0a1c31" stroke="#74bfff" stroke-width="1.2"/></g>
+</svg>
+<svg class="blueprint" viewBox="0 0 500 420" aria-label="사람들의 이름이 모인 집 청사진">
+<defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#68bfff" stroke-opacity=".18" stroke-width=".7"/></pattern><filter id="shine"><feGaussianBlur stdDeviation="3"/></filter></defs>
+<rect x="12" y="12" width="476" height="396" rx="2" fill="#09294a" fill-opacity=".42" stroke="#6bc8ff" stroke-opacity=".55"/><rect x="12" y="12" width="476" height="396" fill="url(#grid)"/>
+<g fill="none" stroke="#9de0ff" stroke-width="2" stroke-linejoin="round"><path d="M115 205 250 95 385 205M145 190V330H355V190M185 330V250H225V330M275 330V250H315V330M180 215H320V245H180Z"/><path d="M160 190 185 165H315L340 190M200 165V145H300V165M250 95V60M240 60H260M155 210H345M155 225H345" stroke-width="1.2"/><path d="M162 260H178V285H162ZM322 260H338V285H322ZM200 200H230V225H200ZM270 200H300V225H270Z" stroke-width="1.3"/></g>
+<g fill="none" stroke="#d8f3ff" stroke-width="5" opacity=".22" filter="url(#shine)"><path d="M115 205 250 95 385 205M145 190V330H355V190"/></g>
+<g fill="#d9f2ff" font-size="11" font-family="sans-serif" opacity=".9"><text x="30" y="42">WELCOME HOME / BLUEPRINT</text><text x="30" y="390">LOVE · HOPE · HOME</text><text x="405" y="390" text-anchor="end">CH+</text></g>
+</svg>
+<div class="countdown" id="countdown"></div>
+</section>
+<p class="status" id="status" aria-live="polite"></p>
+<section class="panel"><form id="nameForm"><label class="sr-only" for="nameInput">사랑하는 사람 이름</label><input id="nameInput" maxlength="30" placeholder="사랑하는 사람의 이름" autocomplete="off" required><button id="submitBtn" type="submit">이름 남기기</button></form><div class="meta"><span id="countLabel">0 / 10</span><span>이름은 청사진에 공개됩니다</span></div></section>
+<section class="names"><div class="names-head"><span>함께 그리는 이름</span><span id="totalLabel">0명</span></div><div class="name-list" id="nameList"></div></section>
+<p class="privacy">입력한 이름은 참여한 모든 사람의 화면에 표시됩니다. 공개해도 괜찮은 이름만 입력해 주세요.</p>
+</main>
+<script>
+(function(){
+'use strict';
+var API='https://script.google.com/macros/s/AKfycbwpCNRWgHknWBzv9cLjf4IMqwGsvgll3mDFb6WAfN79YAbkT9a_IPFFWa8eXyUICJ00/exec';
+var TARGET=10, POLL_MS=2500, state={names:[],openAt:null,isOpen:false},busy=false;
+var $=function(id){return document.getElementById(id)};
+function makeId(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():'bp-'+Date.now()+'-'+Math.random().toString(36).slice(2)}
+function render(s){
+ if(!s||!s.ok)return;
+ state=s;
+ var scene=$('scene'),opened=!!s.isOpen,remaining=s.openAt?Math.max(0,Number(s.openAt)-Date.now()):null;
+ if(s.openAt&&remaining<=0){opened=true}
+ scene.classList.toggle('open',opened);
+ $('countLabel').textContent=Math.min(s.names.length,TARGET)+' / '+TARGET;
+ $('totalLabel').textContent=s.names.length+'명';
+ $('status').textContent=opened?'':'';
+ $('countdown').textContent=(!opened&&remaining!==null)?(Math.ceil(remaining/1000)+'초'):'';
+ $('submitBtn').disabled=busy||opened;
+ $('nameInput').disabled=opened;
+ var list=$('nameList');list.replaceChildren();
+ s.names.forEach(function(item){
+  var chip=document.createElement('span');chip.className='name-chip';chip.textContent=item.name;list.appendChild(chip);
+ });
+ if(opened){$('countdown').textContent='';}
+}
+async function refresh(){
+ try{var r=await fetch(API+'?mode=blueprint&t='+Date.now(),{cache:'no-store',redirect:'follow'});var j=await r.json();render(j)}catch(e){}
+}
+$('nameForm').addEventListener('submit',async function(e){
+ e.preventDefault();if(busy||state.isOpen)return;
+ var name=$('nameInput').value.trim();if(!name)return;
+ busy=true;$('submitBtn').disabled=true;$('submitBtn').textContent='등록 중…';
+ try{
+  var r=await fetch(API,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'blueprintAdd',name:name,requestId:makeId()})});
+  var j=await r.json();
+  if(!j.ok)throw new Error(j.error||'등록하지 못했습니다.');
+  render(j);$('nameInput').value='';
+ }catch(err){$('status').textContent='연결이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.'}
+ finally{busy=false;$('submitBtn').textContent='이름 남기기';$('submitBtn').disabled=state.isOpen;refresh()}
+});
+refresh();setInterval(refresh,POLL_MS);window.addEventListener('focus',refresh);
+})();
+</script></body></html>
