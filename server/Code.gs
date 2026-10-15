@@ -48,8 +48,9 @@ function addStats_(minutes){
   props.setProperty(COUNT_KEY,String(s.count));
   return s;
 }
-function doGet(){
+function doGet(e){
   try{
+    if(e && e.parameter && e.parameter.mode === 'blueprint') return json_(blueprintState_());
     var s=stats_();
     return json_({ok:true,minutes:s.minutes,count:s.count});
   }catch(err){return json_({ok:false,error:String(err)});}
@@ -60,6 +61,7 @@ function doPost(e){
     lock.waitLock(10000);
     var body={};
     if(e&&e.postData&&e.postData.contents) body=JSON.parse(e.postData.contents);
+    if((body.action||'add')==='blueprintAdd') return json_(addBlueprintName_(body));
     if((body.action||'add')!=='add') return json_({ok:false,error:'알 수 없는 요청입니다.'});
 
     var name=String(body.name||'').trim().slice(0,MAX_NAME);
@@ -77,4 +79,57 @@ function doPost(e){
     return json_({ok:true,minutes:s.minutes,count:s.count});
   }catch(err){return json_({ok:false,error:String(err)});}
   finally{try{lock.releaseLock();}catch(ignore){}}
+}
+
+/* WELCOME HOME blueprint reveal — separate feature; prayer endpoints above remain intact. */
+var BLUEPRINT_SHEET='blueprint_names';
+var BLUEPRINT_TARGET=10;
+var BLUEPRINT_DELAY_MS=20000;
+var BLUEPRINT_STATE_KEY='welcome.blueprint.state.v1';
+
+function blueprintSheet_(){
+  var ss=SpreadsheetApp.getActiveSpreadsheet();
+  var sh=ss.getSheetByName(BLUEPRINT_SHEET);
+  if(!sh){sh=ss.insertSheet(BLUEPRINT_SHEET);sh.appendRow(['id','ts','name']);sh.setFrozenRows(1);}
+  return sh;
+}
+function blueprintState_(){
+  var props=PropertiesService.getScriptProperties();
+  var raw=props.getProperty(BLUEPRINT_STATE_KEY);
+  var state=raw?JSON.parse(raw):{openAt:null,isOpen:false};
+  var sh=blueprintSheet_(), last=sh.getLastRow(), names=[];
+  if(last>=2){
+    var rows=sh.getRange(2,1,last-1,3).getDisplayValues();
+    names=rows.map(function(r){return {id:r[0],name:r[2]};}).filter(function(r){return r.name;});
+  }
+  if(!state.isOpen && state.openAt && Date.now()>=Number(state.openAt)){
+    state.isOpen=true;
+    props.setProperty(BLUEPRINT_STATE_KEY,JSON.stringify(state));
+  }
+  return {ok:true,names:names,target:BLUEPRINT_TARGET,openAt:state.openAt?Number(state.openAt):null,isOpen:!!state.isOpen,serverNow:Date.now()};
+}
+function addBlueprintName_(body){
+  var name=String(body.name||'').trim().replace(/[<>]/g,'').slice(0,30);
+  var id=String(body.requestId||'').trim().slice(0,80);
+  if(!name) return {ok:false,error:'이름을 입력해주세요.'};
+  if(!id) return {ok:false,error:'요청을 확인할 수 없습니다. 다시 시도해주세요.'};
+  var props=PropertiesService.getScriptProperties();
+  var stateKey=BLUEPRINT_STATE_KEY;
+  var state=JSON.parse(props.getProperty(stateKey)||'{"openAt":null,"isOpen":false}');
+  var sh=blueprintSheet_(), last=sh.getLastRow();
+  if(last>=2){
+    var ids=sh.getRange(2,1,last-1,1).getDisplayValues().map(function(r){return r[0];});
+    if(ids.indexOf(id)!==-1) return blueprintState_();
+  }
+  if(state.isOpen || (state.openAt && Date.now()>=Number(state.openAt))){
+    state.isOpen=true;props.setProperty(stateKey,JSON.stringify(state));
+    return {ok:false,error:'청사진이 이미 펼쳐졌습니다.',state:blueprintState_()};
+  }
+  sh.appendRow([id,new Date(),name]);
+  var count=sh.getLastRow()-1;
+  if(count>=BLUEPRINT_TARGET && !state.openAt){
+    state.openAt=Date.now()+BLUEPRINT_DELAY_MS;
+    props.setProperty(stateKey,JSON.stringify(state));
+  }
+  return blueprintState_();
 }
